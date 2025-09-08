@@ -18,6 +18,7 @@ builder.AddNpgsqlDataSource("marten-db");
 builder.Services.AddMarten(opt =>
     {
         opt.DatabaseSchemaName = "beersender";
+        opt.ApplyDomainConfig();
     })
     .UseNpgsqlDataSource();
 

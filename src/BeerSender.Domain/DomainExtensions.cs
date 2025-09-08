@@ -1,6 +1,7 @@
 using BeerSender.Domain.Boxes;
 using BeerSender.Domain.Boxes.Commands;
 using BeerSender.Domain.JsonConfiguration;
+using BeerSender.Domain.Projections;
 using JasperFx.Events.Projections;
 using Marten;
 using Marten.Events.Projections;
@@ -24,11 +25,13 @@ public static class DomainExtensions
     
     public static void ApplyDomainConfig(this StoreOptions options)
     {
-        
+        options.Schema.For<OpenBox>()
+            .Identity(ob => ob.BoxId)
+            .UseNumericRevisions(true);
     }
     
     public static void AddProjections(this StoreOptions options)
     {
-        
+        options.Projections.Add<OpenBoxProjection>(ProjectionLifecycle.Async);
     }
 }

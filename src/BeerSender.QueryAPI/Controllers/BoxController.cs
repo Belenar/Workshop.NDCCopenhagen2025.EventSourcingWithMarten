@@ -1,4 +1,5 @@
 using BeerSender.Domain.Boxes;
+using BeerSender.Domain.Projections;
 using Marten;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,13 +27,17 @@ public class BoxController(IDocumentStore store) : ControllerBase
         return box;
     }
     
-    // [HttpGet]
-    // [Route("all-open")]
-    // public async Task<IEnumerable<OpenBox>> GetOpenBoxes()
-    // {
-    //
-    // }
-    //
+    [HttpGet]
+    [Route("all-open")]
+    public async Task<IEnumerable<OpenBox>> GetOpenBoxes()
+    {
+        await using var session = store.QuerySession();
+        var boxes = await session.Query<OpenBox>()
+            // LINQ can go here
+            .ToListAsync();
+        return boxes;
+    }
+    
     // [HttpGet]
     // [Route("all-unsent")]
     // public async Task<IEnumerable<UnsentBox>> GetUnsentBoxes()
