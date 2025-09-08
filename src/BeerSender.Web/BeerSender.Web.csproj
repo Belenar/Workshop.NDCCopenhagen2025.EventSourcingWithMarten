@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Aspire.Npgsql" Version="9.4.2" />
+      <PackageReference Include="Marten.AspNetCore" Version="8.10.0" />
+      <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.19" />
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\BeerSender.Domain\BeerSender.Domain.csproj" />
+      <ProjectReference Include="..\BeerSender.ServiceDefaults\BeerSender.ServiceDefaults.csproj" />
+    </ItemGroup>
+
+</Project>

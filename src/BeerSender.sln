@@ -1,0 +1,54 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36414.22 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerSender.AppHost", "BeerSender.AppHost\BeerSender.AppHost.csproj", "{30CF4153-84F6-4564-BD9C-E2C5B4C5478E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerSender.ServiceDefaults", "BeerSender.ServiceDefaults\BeerSender.ServiceDefaults.csproj", "{6D4AD963-0B61-B8E4-5DA4-C5E01EB663FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerSender.Web", "BeerSender.Web\BeerSender.Web.csproj", "{0A397966-3555-221E-E6E5-D840FA33F350}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerSender.Domain", "BeerSender.Domain\BeerSender.Domain.csproj", "{56C9EB6F-D851-48CB-945B-8411E577037E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerSender.Domain.Tests", "BeerSender.Domain.Tests\BeerSender.Domain.Tests.csproj", "{207B1930-170D-4C44-974B-4675A04378A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeerSender.QueryAPI", "BeerSender.QueryAPI\BeerSender.QueryAPI.csproj", "{4979DA29-37B7-4EDD-B716-1C4F71DA4302}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30CF4153-84F6-4564-BD9C-E2C5B4C5478E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30CF4153-84F6-4564-BD9C-E2C5B4C5478E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30CF4153-84F6-4564-BD9C-E2C5B4C5478E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30CF4153-84F6-4564-BD9C-E2C5B4C5478E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D4AD963-0B61-B8E4-5DA4-C5E01EB663FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D4AD963-0B61-B8E4-5DA4-C5E01EB663FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D4AD963-0B61-B8E4-5DA4-C5E01EB663FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D4AD963-0B61-B8E4-5DA4-C5E01EB663FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A397966-3555-221E-E6E5-D840FA33F350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A397966-3555-221E-E6E5-D840FA33F350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A397966-3555-221E-E6E5-D840FA33F350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A397966-3555-221E-E6E5-D840FA33F350}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56C9EB6F-D851-48CB-945B-8411E577037E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56C9EB6F-D851-48CB-945B-8411E577037E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56C9EB6F-D851-48CB-945B-8411E577037E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56C9EB6F-D851-48CB-945B-8411E577037E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{207B1930-170D-4C44-974B-4675A04378A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{207B1930-170D-4C44-974B-4675A04378A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{207B1930-170D-4C44-974B-4675A04378A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{207B1930-170D-4C44-974B-4675A04378A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4979DA29-37B7-4EDD-B716-1C4F71DA4302}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4979DA29-37B7-4EDD-B716-1C4F71DA4302}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4979DA29-37B7-4EDD-B716-1C4F71DA4302}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4979DA29-37B7-4EDD-B716-1C4F71DA4302}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85DCA094-34A0-4C41-84F0-F9FE3F503747}
+	EndGlobalSection
+EndGlobal
