@@ -13,7 +13,8 @@ public class BoxController(CommandRouter router) : ControllerBase
     [ProducesResponseType(StatusCodes.Status202Accepted)]
     public async Task<IActionResult> CreateBox([FromBody]CreateBox command)
     {
-        // TODO
+        // Probably wise to map between internal and external command contracts
+        await router.HandleCommand(command);
         return Accepted();
     }
     
@@ -26,14 +27,14 @@ public class BoxController(CommandRouter router) : ControllerBase
     //     return Accepted();
     // }
     //
-    // [HttpPost]
-    // [Route("add-label")]
-    // [ProducesResponseType(StatusCodes.Status202Accepted)]
-    // public async Task<IActionResult> AddLabel([FromBody]AddShippingLabel command)
-    // {
-    //     await router.HandleCommand(command);
-    //     return Accepted();
-    // }
+    [HttpPost]
+    [Route("add-label")]
+    [ProducesResponseType(StatusCodes.Status202Accepted)]
+    public async Task<IActionResult> AddLabel([FromBody]AddShippingLabel command)
+    {
+        await router.HandleCommand(command);
+        return Accepted();
+    }
     //
     // [HttpPost]
     // [Route("close")]

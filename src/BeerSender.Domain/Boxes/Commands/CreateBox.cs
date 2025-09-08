@@ -1,3 +1,4 @@
+using BeerSender.Domain.Boxes.Events;
 using Marten;
 
 namespace BeerSender.Domain.Boxes.Commands;
@@ -12,6 +13,8 @@ public class CreateBoxHandler
 {
     public async Task Handle(IDocumentSession session, CreateBox command)
     {
-        // TO DO
+        var capacity = BoxCapacity.Create(command.DesiredNumberOfSpots);
+        var @event = new BoxCreated(capacity);
+        session.Events.StartStream<Box>(command.BoxId, @event);
     }
 }

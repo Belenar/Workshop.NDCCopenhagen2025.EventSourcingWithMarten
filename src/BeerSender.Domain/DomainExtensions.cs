@@ -14,6 +14,9 @@ public static class DomainExtensions
     public static void RegisterDomain(this IServiceCollection services)
     {
         services.AddScoped<CommandRouter>();
+
+        services.AddTransient<ICommandHandler<CreateBox>, CreateBoxHandler>();
+        services.AddTransient<ICommandHandler<AddShippingLabel>, AddLabelHandler>();
     }
     
     public static void ApplyDomainConfig(this StoreOptions options)

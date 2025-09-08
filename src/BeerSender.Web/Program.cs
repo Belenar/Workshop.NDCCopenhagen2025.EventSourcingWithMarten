@@ -26,8 +26,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.RegisterDomain();
 
 builder.AddNpgsqlDataSource("marten-db");
-
-// TODO
+builder.Services.AddMarten(opt =>
+{
+    opt.DatabaseSchemaName = "beersender";
+}).UseNpgsqlDataSource();
 
 var app = builder.Build();
 
