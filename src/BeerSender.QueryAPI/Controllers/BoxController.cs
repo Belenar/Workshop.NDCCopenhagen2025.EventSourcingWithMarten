@@ -8,20 +8,24 @@ namespace BeerSender.QueryAPI.Controllers;
 [Route("[controller]")]
 public class BoxController(IDocumentStore store) : ControllerBase
 {
-    // [HttpGet]
-    // [Route("{id:guid}")]
-    // public async Task<Box?> GetById([FromRoute]Guid id)
-    // {
-    //
-    // }
-    //
-    // [HttpGet]
-    // [Route("{id:guid}/by-sequence/{sequence:int}")]
-    // public async Task<Box?> GetById([FromRoute] Guid id, [FromRoute]int sequence)
-    // {
-    //
-    // }
-    //
+    [HttpGet]
+    [Route("{id:guid}")]
+    public async Task<Box?> GetById([FromRoute]Guid id)
+    {
+        await using var session = store.QuerySession();
+        var box = await session.Events.AggregateStreamAsync<Box>(id);
+        return box;
+    }
+
+    [HttpGet]
+    [Route("{id:guid}/by-sequence/{sequence:int}")]
+    public async Task<Box?> GetById([FromRoute] Guid id, [FromRoute]int sequence)
+    {
+        await using var session = store.QuerySession();
+        var box = await session.Events.AggregateStreamAsync<Box>(id, version: sequence);
+        return box;
+    }
+    
     // [HttpGet]
     // [Route("all-open")]
     // public async Task<IEnumerable<OpenBox>> GetOpenBoxes()

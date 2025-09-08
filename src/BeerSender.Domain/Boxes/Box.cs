@@ -5,7 +5,11 @@ namespace BeerSender.Domain.Boxes;
 public class Box
 {
     public Guid Id { get; set; }
+    public List<BeerBottle> BeerBottles { get; set; } = [];
     public BoxCapacity? BoxType { get; set; }
+    public ShippingLabel? ShippingLabel { get; set; }
+    public bool IsClosed { get; set; }
+    public bool IsSent { get; set; }
 
     public static Box Create(BoxCreated created)
     {
@@ -14,25 +18,26 @@ public class Box
             BoxType = created.Capacity
         };
     }
-}
-
-public record ShippingLabel(Carrier Carrier, string TrackingCode)
-{
-    public bool IsValid()
+    
+    public void Apply(BeerBottleAdded @event)
     {
-        return Carrier switch
-        {
-            Carrier.UPS => TrackingCode.StartsWith("ABC"),
-            Carrier.FedEx => TrackingCode.StartsWith("DEF"),
-            Carrier.PostDanmark => TrackingCode.StartsWith("GHI"),
-            _ => throw new ArgumentOutOfRangeException(nameof(Carrier), Carrier.ToString(), null),
-        };
+        BeerBottles.Add(@event.Bottle);
     }
-}
 
-public enum Carrier
-{
-    UPS,
-    FedEx,
-    PostDanmark 
+    public void Apply(ShippingLabelAdded @event)
+    {
+        ShippingLabel = @event.Label;
+    }
+
+    public void Apply(BoxClosed @event)
+    {
+        IsClosed = true;
+    }
+
+    public void Apply(BoxSent @event)
+    {
+        IsSent = true;
+    }
+
+    public bool IsFull => BeerBottles.Count >= BoxType?.NumberOfSpots;
 }

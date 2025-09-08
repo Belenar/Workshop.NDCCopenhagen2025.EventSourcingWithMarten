@@ -17,6 +17,9 @@ public static class DomainExtensions
 
         services.AddTransient<ICommandHandler<CreateBox>, CreateBoxHandler>();
         services.AddTransient<ICommandHandler<AddShippingLabel>, AddLabelHandler>();
+        services.AddTransient<ICommandHandler<AddBeerBottle>, AddBeerBottleHandler>();
+        services.AddTransient<ICommandHandler<CloseBox>, CloseBoxHandler>();
+        services.AddTransient<ICommandHandler<SendBox>, SendBoxHandler>();
     }
     
     public static void ApplyDomainConfig(this StoreOptions options)
