@@ -1,5 +1,6 @@
 using BeerSender.Domain.Boxes;
 using BeerSender.Domain.Boxes.Commands;
+using BeerSender.Domain.JsonConfiguration;
 using BeerSender.Domain.Projections;
 using JasperFx.Events.Projections;
 using Marten;
@@ -23,6 +24,13 @@ public static class DomainExtensions
     
     public static void ApplyDomainConfig(this StoreOptions options)
     {
+        options.UseSystemTextJsonForSerialization(configure: opt =>
+        {
+            opt.AllowOutOfOrderMetadataProperties = true;
+            opt.TypeInfoResolver = new CommandTypeResolver();
+        });
+        options.Events.MetadataConfig.EnableAll();
+        
         options.Schema.For<Box>()
             .UseNumericRevisions(true);
         options.Schema.For<OpenBox>()
@@ -34,6 +42,8 @@ public static class DomainExtensions
         options.Schema.For<UnsentBox>()
             .Identity(bb => bb.BoxId)
             .UseNumericRevisions(true);
+        options.Schema.For<LoggedCommand>()
+            .Identity(bb => bb.CommandId);
     }
     
     public static void AddProjections(this StoreOptions options)
