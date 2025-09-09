@@ -1,5 +1,6 @@
 using BeerSender.Domain.Boxes;
 using BeerSender.Domain.Boxes.Commands;
+using BeerSender.Domain.Boxes.Events;
 using BeerSender.Domain.JsonConfiguration;
 using BeerSender.Domain.Projections;
 using JasperFx.Events.Projections;
@@ -44,6 +45,16 @@ public static class DomainExtensions
             .UseNumericRevisions(true);
         options.Schema.For<LoggedCommand>()
             .Identity(bb => bb.CommandId);
+        
+        options.Events.Upcast<BoxCreated, BoxCreatedWithContainerType>(
+            async (oldEvent, ct) =>
+            {
+                return new BoxCreatedWithContainerType(
+                    oldEvent.Capacity,
+                    ContainerType.BelgianBottle
+                );
+            }
+        );
     }
     
     public static void AddProjections(this StoreOptions options)

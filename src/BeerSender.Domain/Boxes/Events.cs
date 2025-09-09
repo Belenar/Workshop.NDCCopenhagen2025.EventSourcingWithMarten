@@ -2,6 +2,14 @@
 
 public record BoxCreated(BoxCapacity Capacity);
 
+public record BoxCreatedWithContainerType(BoxCapacity Capacity, ContainerType ContainerType);
+
+public enum ContainerType
+{
+    BelgianBottle,
+    DutchCan
+}
+
 public record ShippingLabelAdded(ShippingLabel Label);
 
 public record FailedToAddShippingLabel(FailedToAddShippingLabel.FailReason Reason)
