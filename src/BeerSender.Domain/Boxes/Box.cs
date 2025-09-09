@@ -1,8 +1,9 @@
 using BeerSender.Domain.Boxes.Events;
+using Marten.Metadata;
 
 namespace BeerSender.Domain.Boxes;
 
-public class Box
+public class Box : IRevisioned
 {
     public Guid Id { get; set; }
     public List<BeerBottle> BeerBottles { get; set; } = [];
@@ -10,6 +11,8 @@ public class Box
     public ShippingLabel? ShippingLabel { get; set; }
     public bool IsClosed { get; set; }
     public bool IsSent { get; set; }
+
+    public int Version { get; set; }
 
     public static Box Create(BoxCreated created)
     {

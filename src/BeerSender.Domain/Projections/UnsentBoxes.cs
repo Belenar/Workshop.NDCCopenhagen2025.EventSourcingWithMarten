@@ -18,8 +18,40 @@ public class UnsentBoxProjection : EventProjection
         {
             operations.Store(new UnsentBox
             {
-                BoxId = evt.StreamId
+                BoxId = evt.StreamId,
+                Status = "Created"
             });
+        });
+        
+        Project<IEvent<BoxSent>>((evt, operations) =>
+        {
+            operations.Delete<UnsentBox>(evt.StreamId);
+        });
+        
+        ProjectAsync<IEvent<BoxClosed>>(async (evt, operations, cancellation) =>
+        {
+            var unsentBox = await operations.LoadAsync<UnsentBox>(evt.StreamId, cancellation);
+
+            if (unsentBox is null) return;
+
+            unsentBox.Status = (unsentBox.Status == "Created") 
+                ? "Closed" 
+                : "Ready to send!";
+            
+            operations.Store(unsentBox);
+        });
+        
+        ProjectAsync<IEvent<ShippingLabelAdded>>(async (evt, operations, cancellation) =>
+        {
+            var unsentBox = await operations.LoadAsync<UnsentBox>(evt.StreamId, cancellation);
+
+            if (unsentBox is null) return;
+
+            unsentBox.Status = (unsentBox.Status == "Created") 
+                ? "Label Added" 
+                : "Ready to send!";
+            
+            operations.Store(unsentBox);
         });
     }
 }
