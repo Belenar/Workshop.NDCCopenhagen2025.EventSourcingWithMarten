@@ -15,8 +15,22 @@ public class MartenFixture : IDisposable
     public MartenFixture()
     {
         CreateSchema();
+
+        _host = Host.CreateDefaultBuilder()
+            .ConfigureServices(services =>
+            {
+                services.AddMarten(options =>
+                    {
+                        options.Connection(GetConnectionString());
+                        options.DatabaseSchemaName = schema;
+
+                        options.ApplyDomainConfig();
+                        options.AddProjections();
+                    })
+                    .AddAsyncDaemon(DaemonMode.Solo);
+            }).Start();
         
-        // TODO: Create host & get Store
+        Store = _host.Services.GetRequiredService<IDocumentStore>();
     }
 
     public void Dispose()
