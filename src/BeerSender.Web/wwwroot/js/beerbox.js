@@ -6,7 +6,10 @@ let connection = new signalR.HubConnectionBuilder().withUrl("/event-hub").build(
 // Subscribe to the PublishEvent messages from the hub
 // Just append them to the events list
 connection.on("PublishEvent", function (aggregate_id, event, eventType) {
-    // TO DO
+    let li = document.createElement("li");
+    document.getElementById("eventList").appendChild(li);
+    let eventContent = JSON.stringify(event);
+    li.textContent = `${aggregate_id} - ${eventType}: ${eventContent}`;
 });
 
 // When the connection is opened, generate a random package ID
@@ -28,10 +31,11 @@ document.getElementById("createPackage").addEventListener("click", function (eve
     });
     // Create the command
     let command = {
-        // TO DO
+        "boxId": aggregate_id,
+        "desiredNumberOfSpots": capacity
     }
     // Post the command
-    postCommand("/api/Command/Box/create", command);
+    postCommand("/api/command/Box/create", command);
     event.preventDefault();
 });
 
@@ -42,7 +46,11 @@ document.getElementById("addLabel").addEventListener("click", function (event) {
     let code = document.getElementById("label_code_input").value;
     // Create the command
     let command = {
-        // TO DO
+        "boxId": aggregate_id,
+        "label": {
+            "carrier": carrier,
+            "trackingCode": code
+        }
     }
     // Post the command
     postCommand("/api/Command/Box/add-label", command);

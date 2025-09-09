@@ -11,6 +11,6 @@ public class EventHub : Hub
 
     public async Task SubscribeToAggregate(Guid aggregateId)
     {
-        // TODO
+        await Groups.AddToGroupAsync(Context.ConnectionId, aggregateId.ToString());
     }
 }

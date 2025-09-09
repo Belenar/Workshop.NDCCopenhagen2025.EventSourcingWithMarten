@@ -1,5 +1,6 @@
 using BeerSender.Domain;
 using BeerSender.Domain.Boxes;
+using BeerSender.Domain.Boxes.Events;
 using BeerSender.Web.EventPublishing;
 using JasperFx.Events.Daemon;
 using Marten;
@@ -33,7 +34,12 @@ builder.Services.AddMarten(opt =>
         opt.AddProjections();
     })
     .AddAsyncDaemon(DaemonMode.Solo)
-    .UseNpgsqlDataSource();
+    .UseNpgsqlDataSource()
+    .AddSubscriptionWithServices<EventHubSubscription>(ServiceLifetime.Singleton, opt =>
+    {
+        opt.FilterIncomingEventsOnStreamType(typeof(Box));
+        opt.Options.BatchSize = 10;
+    });
 
 var app = builder.Build();
 
